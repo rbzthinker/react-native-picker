@@ -37,7 +37,8 @@ export default class PickerAny extends Component {
 		selectedValue: PropTypes.any.isRequired,
 		onPickerDone: PropTypes.func,
 		onPickerCancel: PropTypes.func,
-		onValueChange: PropTypes.func
+		onValueChange: PropTypes.func,
+		allowFontScaling: PropTypes.bool,
 	};
 
 	static defaultProps = {
@@ -50,7 +51,8 @@ export default class PickerAny extends Component {
 		showDuration: 300,
 		onPickerDone: ()=>{},
 		onPickerCancel: ()=>{},
-		onValueChange: ()=>{}
+		onValueChange: ()=>{},
+		allowFontScaling: true,
 	};
 
 	constructor(props, context){
@@ -404,7 +406,7 @@ export default class PickerAny extends Component {
 
 		let mask = this.state.showMask ? (
 			<View style={styles.mask} >
-				<Text style={{width: width, height: height}} onPress={this._pickerCancel.bind(this)}></Text>
+				<Text allowFontScaling={this.props.allowFontScaling} style={{width: width, height: height}} onPress={this._pickerCancel.bind(this)}></Text>
 			</View>
 		) : null;
 
@@ -419,14 +421,14 @@ export default class PickerAny extends Component {
 				<View style={[styles.pickerBox, this.state.style]}>
 					<View style={[styles.pickerToolbar, this.state.pickerToolBarStyle, {width: this.state.style.width || width}]}>
 						<View style={styles.pickerCancelBtn}>
-							<Text style={[styles.pickerFinishBtnText, this.state.pickerBtnStyle]}
+							<Text allowFontScaling={this.props.allowFontScaling} style={[styles.pickerFinishBtnText, this.state.pickerBtnStyle]}
 								onPress={this._pickerCancel.bind(this)}>{this.state.pickerCancelBtnText}</Text>
 						</View>
-						<Text style={[styles.pickerTitle, this.state.pickerTitleStyle]} numberOfLines={1}>
+						<Text allowFontScaling={this.props.allowFontScaling} style={[styles.pickerTitle, this.state.pickerTitleStyle]} numberOfLines={1}>
 							{this.state.pickerTitle}
 						</Text>
 						<View style={styles.pickerFinishBtn}>
-							<Text style={[styles.pickerFinishBtnText, this.state.pickerBtnStyle]}
+							<Text allowFontScaling={this.props.allowFontScaling} style={[styles.pickerFinishBtnText, this.state.pickerBtnStyle]}
 								onPress={this._pickerFinish.bind(this)}>{this.state.pickerBtnText}</Text>
 						</View>
 					</View>
